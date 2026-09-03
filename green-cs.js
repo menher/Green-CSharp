@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         github - restore old C# green
 // @namespace    https://github.com/
-// @version      1.0
+// @version      1.1
 // @description  restores the old green color for C# on GitHub
 // @match        https://github.com/*
 // @grant        none
@@ -16,12 +16,11 @@
     const style = document.createElement('style');
 
     style.textContent = `
-        /*
-         * GitHub C# language colors
-         */
-
-        /* C# percentage bar */
         [role="progressbar"][aria-label^="C#:"] {
+            background-color: ${GREEN} !important;
+        }
+
+        [role="progressbar"][aria-label^="C#:"] > * {
             background-color: ${GREEN} !important;
         }
     `;
@@ -57,21 +56,23 @@
                 GREEN,
                 'important'
             );
+
+            bar.querySelectorAll('*').forEach(child => {
+                child.style.setProperty(
+                    'background-color',
+                    GREEN,
+                    'important'
+                );
+            });
         });
 
 
         // C# sidebar language dot
         document.querySelectorAll(
-            '.SidebarLanguages-module__languageItem__TkIfb'
-        ).forEach(item => {
-            const name = item.querySelector(
-                '[itemprop="keywords"]'
-            );
-
-            if (name && name.textContent.trim() === 'C#') {
-                const dot = item.querySelector(
-                    '.SidebarLanguages-module__languageDot__mtE1V'
-                );
+            'span[itemprop="keywords"]'
+        ).forEach(name => {
+            if (name.textContent.trim() === 'C#') {
+                const dot = name.previousElementSibling;
 
                 if (dot) {
                     dot.style.setProperty(
