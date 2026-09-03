@@ -12,5 +12,5 @@ I just don't like the new color, thats it.
 3. Save the changes then go back into github and refresh the page with **Ctrl + Shift + R** to refresh the cache
 4. That's it! the old C# green should be bought back!
 
-## Issues
+## Contributing
 If i missed a part of github that still uses the new C# color then feel free to write an issue or make a pull request with the fix!
