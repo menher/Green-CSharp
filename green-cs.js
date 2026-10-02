@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         github - restore old C# green
 // @namespace    https://github.com/
-// @version      1.1
+// @version      1.2
 // @description  restores the old green color for C# on GitHub
 // @match        https://github.com/*
 // @grant        none
@@ -83,6 +83,22 @@
                 }
             }
         });
+
+        // C# org repo language dot
+        document.querySelectorAll(
+            'span.LanguageCircle-module__LanguageCircleIndicator__mI9vs'
+        ).forEach(dot => {
+            const parent = dot.parentElement;
+
+            if (parent && parent.textContent.trim().startsWith('C#')) {
+                dot.style.setProperty(
+                    'background-color',
+                    GREEN,
+                    'important'
+                );
+            }
+        });
+
     }
 
 
